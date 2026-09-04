@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Wahadat Laundry Services in Sharjah — professional laundry, dry cleaning, pressing, pickup and delivery.">
-  <title>Wahadat Laundry Services | Sharjah</title>
+  <meta name="description" content="Wahadat Maliha Laundry Services in Sharjah — professional laundry, dry cleaning, pressing, pickup and delivery.">
+  <title>Wahadat Maliha Laundry Services | Sharjah</title>
   <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -78,10 +78,28 @@
     .btn-light{background:#fff;color:var(--navy)}
     .btn-light:hover{background:var(--sky)}
 
-    /* MOVING FRAME STRIP (New Gallery Place) */
-    .frame-strip{background:#fff;padding:30px 0;overflow:hidden;border-bottom:1px solid #e9eef2}
-    .frame-track{display:flex;gap:15px;width:max-content;animation:scrollX 25s linear infinite}
-    .frame-track img{width:340px;height:210px;object-fit:cover;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.1);transition:0.3s}
+    /* Gallery Page Section (Scrollable Grid) */
+    .gallery-page{background:var(--soft);padding:88px 0}
+    .gallery-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:25px}
+    .gallery-item{position:relative;border-radius:20px;overflow:hidden;cursor:pointer;box-shadow:0 5px 15px rgba(0,0,0,0.1);transition:0.3s;aspect-ratio:1/1}
+    .gallery-item img{height:100%;transition:transform .45s ease}
+    .gallery-item:hover{transform:translateY(-5px);box-shadow:0 15px 30px rgba(0,0,0,0.2)}
+    .gallery-item:hover img{transform:scale(1.1)}
+    .gallery-item::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0);transition:0.3s}
+    .gallery-item:hover::after{background:rgba(0,0,0,0.3)}
+    .gallery-item .view-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);color:#fff;font-size:28px;transition:0.3s;z-index:2}
+    .gallery-item:hover .view-icon{transform:translate(-50%,-50%) scale(1)}
+
+    /* Map Section Under Gallery */
+    .map-section{padding:30px 0 88px;background:var(--soft)}
+    .map-box{border-radius:24px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.15);height:400px}
+    .map-box iframe{width:100%;height:100%;border:0}
+
+    /* Big Square Moving Gallery */
+    .gallery-strip-section{background:#fff;padding:88px 0}
+    .frame-strip{background:transparent;padding:30px 0;overflow:hidden}
+    .frame-track{display:flex;gap:20px;width:max-content;animation:scrollX 30s linear infinite}
+    .frame-track img{width:400px;height:400px;object-fit:cover;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,0.15);transition:0.3s}
     .frame-track img:hover{transform:scale(1.05)}
     @keyframes scrollX{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
@@ -185,6 +203,12 @@
     .f-social.wa:hover{background:#25D366}
     .footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;display:flex;justify-content:space-between;align-items:center;font-size:14px}
 
+    /* Modal */
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:100;align-items:center;justify-content:center;padding:20px}
+    .modal.open{display:flex}
+    .modal img{max-width:1000px;max-height:85vh;border-radius:16px}
+    .close{position:absolute;top:20px;right:25px;color:#fff;background:none;border:0;font-size:38px;cursor:pointer}
+
     @media(max-width:900px){
       .navlinks{display:none}
       .menu{display:block}
@@ -198,6 +222,8 @@
       .side-icon { width: 40px; height: 40px; font-size: 18px; }
       .footer-grid{grid-template-columns:1fr 1fr}
       .qr-grid{grid-template-columns:1fr 1fr 1fr}
+      .frame-track img{width:300px;height:300px}
+      .gallery-grid{grid-template-columns:repeat(2,1fr)}
     }
     @media(max-width:560px){
       .topbar .container{justify-content:center}
@@ -217,6 +243,9 @@
       .qr-grid{grid-template-columns:1fr}
       .side-socials { display: none; }
       .prev{left:10px}.next{right:10px}
+      .frame-track img{width:220px;height:220px}
+      .gallery-grid{grid-template-columns:1fr}
+      .map-box{height:300px}
     }
   </style>
 </head>
@@ -224,7 +253,7 @@
 
 <!-- Floating Side Social Icons -->
 <div class="side-socials">
-  <a href="https://wa.me/971557100191" target="_blank" class="side-icon side-wa" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+  <a href="https://wa.me/971543334393" target="_blank" class="side-icon side-wa" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
   <a href="https://youtube.com" target="_blank" class="side-icon side-yt" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
   <a href="https://instagram.com" target="_blank" class="side-icon side-ig" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
   <a href="https://facebook.com" target="_blank" class="side-icon side-fb" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
@@ -232,12 +261,12 @@
 
 <div class="topbar">
   <div class="container">
-    <div><i class="fa-solid fa-location-dot"></i> Sharjah, UAE | <i class="fa-solid fa-phone"></i> +971 55 710 0191</div>
+    <div><i class="fa-solid fa-location-dot"></i> Sharjah, UAE | <i class="fa-solid fa-phone"></i> +971 54 333 4393 | <i class="fa-solid fa-phone"></i> +971 50 896 8126</div>
     <div class="social-top">
       <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
       <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
       <a href="https://youtube.com" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-      <a href="https://wa.me/971557100191" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://wa.me/971543334393" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
     </div>
   </div>
 </div>
@@ -247,12 +276,13 @@
     <nav>
       <a class="brand" href="#home">
         <span class="brand-mark"><i class="fa-solid fa-shirt"></i></span>
-        <span>Wahadat Laundry</span>
+        <span>Wahadat Maliha Laundry</span>
       </a>
       <div class="navlinks">
         <a href="#home">Home</a>
         <a href="#services">Services</a>
         <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
         <a href="#video">Video</a>
         <a href="#contact" class="navcta">Contact Us</a>
       </div>
@@ -283,30 +313,19 @@
       <div class="hero-content">
         <div class="eyebrow">✨ Fresh • Clean • Professionally Cared For</div>
         <h1>Clean Clothes.<br>Fresh Confidence.</h1>
-        <p>Wahadat Laundry Services delivers dependable laundry and garment-care solutions for customers across Sharjah.</p>
+        <p>Wahadat Maliha Laundry Services delivers dependable laundry and garment-care solutions for customers across Sharjah.</p>
         <div class="buttons">
-          <a class="btn btn-primary" href="tel:+971557100191"><i class="fa-solid fa-phone"></i> Call Now</a>
+          <a class="btn btn-primary" href="tel:+971543334393"><i class="fa-solid fa-phone"></i> Call Now</a>
           <a class="btn btn-light" href="#contact"><i class="fa-solid fa-envelope"></i> Send Message</a>
         </div>
       </div>
     </div>
 
-    <!-- Added Scroll Down Indicator -->
-    <div class="hero-scroll-indicator" onclick="location.href='#gallery'">
+    <div class="hero-scroll-indicator" onclick="location.href='#services'">
       <span>Scroll Down</span>
       <div class="scroll-arrow">↓</div>
     </div>
   </section>
-
-  <!-- NEW REPLACED GALLERY: MOVING FRAME STRIP -->
-  <div class="container" id="gallery">
-    <div class="frame-strip">
-      <div class="frame-track">
-        <img src="https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1521656693074-0ef32e80a5d5?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1610557892470-aeebf5c3d2b7?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1610557892470-aeebf5c3d2b7?auto=format&fit=crop&w=340&h=210" alt="">
-        <img src="https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1521656693074-0ef32e80a5d5?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1610557892470-aeebf5c3d2b7?auto=format&fit=crop&w=340&h=210" alt=""><img src="https://images.unsplash.com/photo-1610557892470-aeebf5c3d2b7?auto=format&fit=crop&w=340&h=210" alt="">
-      </div>
-    </div>
-  </div>
 
   <div class="container quick">
     <div class="quick-card">
@@ -330,7 +349,7 @@
       <div class="section-head">
         <div class="eyebrow">OUR SERVICES</div>
         <h2>Professional care for every load</h2>
-        <p>From everyday clothes to delicate garments, Wahadat Laundry Services is built around clean results and careful handling.</p>
+        <p>From everyday clothes to delicate garments, Wahadat Maliha Laundry Services is built around clean results and careful handling.</p>
       </div>
       <div class="service-grid">
         <article class="service"><div class="service-icon"><i class="fa-solid fa-basket-shopping"></i></div><h3>Wash & Fold</h3><p>Freshly cleaned garments carefully folded and prepared for your home.</p></article>
@@ -356,7 +375,82 @@
           <div class="check">Professional service</div>
           <div class="check">Customer-focused support</div>
         </div>
-        <a class="btn btn-primary" href="tel:+971557100191">Speak With Us</a>
+        <a class="btn btn-primary" href="tel:+971543334393">Speak With Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEDICATED "OUR GALLERY" PAGE (SCROLLABLE GRID) -->
+  <section class="gallery-page" id="gallery">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">OUR GALLERY</div>
+        <h2>Browse Our Fresh Results</h2>
+        <p>Scroll down to view all our latest laundry and dry-cleaning photos. Click any image to see it in full size.</p>
+      </div>
+      
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)"><img src="https://i.ibb.co/rKjw3KK9/Whats-App-Image-2026-09-03-at-23-33-12.jpg" alt="Laundry Machine"><span class="view-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span></div>
+        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)"><img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=600&h=600" alt="Folded Clothes"><span class="view-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span></div>
+        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)"><img src="https://images.unsplash.com/photo-1521656693074-0ef32e80a5d5?auto=format&fit=crop&w=600&h=600" alt="Clean Shirts"><span class="view-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span></div>
+        
+        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)"><img src="https://i.ibb.co/4Rpc07GT/Whats-App-Image-2026-09-03-at-23-33-11-2.jpg" alt="Laundry Service"><span class="view-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span></div>
+        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&h=600" alt="Modern Equipment"><span class="view-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span></div>
+        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)"><img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=600&h=600" alt="Neat Finishing"><span class="view-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span></div>
+        
+        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)"><img src="https://i.ibb.co/dsqB1zRM/Whats-App-Image-2026-09-03-at-23-33-1289.jpg" alt="Ready to Go"><span class="view-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span></div>
+        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)"><img src="https://i.ibb.co/kstgMrVT/Whats-App-Image-2026-09-03-at-23-33-155.jpg" alt="Fresh Fold"><span class="view-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span></div>
+        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)"><img src="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=600&h=600" alt="Happy Customer"><span class="view-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP SECTION UNDER GALLERY -->
+  <section class="map-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">FIND US</div>
+        <h2>Our Location</h2>
+        <p>We are located in Sharjah, UAE. Come visit us or call us for free pickup & delivery!</p>
+      </div>
+      <div class="map-box">
+        <iframe src="https://www.google.com/maps?q=Sharjah%2C%20UAE&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Wahadat Maliha Laundry Services Location Map"></iframe>
+      </div>
+      <div style="text-align:center;margin-top:20px">
+        <a href="https://www.google.com/maps/place/Sharjah/@25.3111439,55.3764114,17z/data=!4m6!3m5!1s0x3e5f5f5fede7964b:0x2a830aa19c1f6d89!8m2!3d25.3561698!4d55.427211!16s%2Fm%2F03w9gtf?hl=en&entry=ttu&g_ep=EgoyMDI2MDkwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-primary">Get Directions on Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIG SQUARE MOVING GALLERY (RIGHT BEFORE VIDEO) -->
+  <section class="gallery-strip-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">SCROLLING GALLERY</div>
+        <h2>Fresh &amp; Clean Results</h2>
+        <p>Take a look at our large, moving gallery of laundry care.</p>
+      </div>
+    </div>
+    <div class="frame-strip">
+      <div class="frame-track">
+        <img src="https://i.ibb.co/rKjw3KK9/Whats-App-Image-2026-09-03-at-23-33-12.jpg" alt="Laundry Machine">
+        <img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=400&h=400" alt="Folded Clothes">
+        <img src="https://images.unsplash.com/photo-1521656693074-0ef32e80a5d5?auto=format&fit=crop&w=400&h=400" alt="Clean Shirts">
+        <img src="https://i.ibb.co/4Rpc07GT/Whats-App-Image-2026-09-03-at-23-33-11-2.jpg" alt="Laundry Service">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&h=400" alt="Modern Equipment">
+        <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=400&h=400" alt="Neat Finishing">
+        <img src="https://i.ibb.co/dsqB1zRM/Whats-App-Image-2026-09-03-at-23-33-1289.jpg" alt="Ready to Go">
+        <img src="https://i.ibb.co/kstgMrVT/Whats-App-Image-2026-09-03-at-23-33-155.jpg" alt="Ready to Go 2">
+        
+        <!-- Duplicate for seamless loop -->
+        <img src="https://i.ibb.co/rKjw3KK9/Whats-App-Image-2026-09-03-at-23-33-12.jpg" alt="Laundry Machine">
+        <img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=400&h=400" alt="Folded Clothes">
+        <img src="https://images.unsplash.com/photo-1521656693074-0ef32e80a5d5?auto=format&fit=crop&w=400&h=400" alt="Clean Shirts">
+        <img src="https://i.ibb.co/4Rpc07GT/Whats-App-Image-2026-09-03-at-23-33-11-2.jpg" alt="Laundry Service">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&h=400" alt="Modern Equipment">
+        <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=400&h=400" alt="Neat Finishing">
+        <img src="https://i.ibb.co/dsqB1zRM/Whats-App-Image-2026-09-03-at-23-33-1289.jpg" alt="Ready to Go">
+        <img src="https://i.ibb.co/kstgMrVT/Whats-App-Image-2026-09-03-at-23-33-155.jpg" alt="Ready to Go 2">
       </div>
     </div>
   </section>
@@ -365,12 +459,12 @@
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">OUR VIDEO</div>
-        <h2>Watch Wahadat Laundry in action</h2>
+        <h2>Watch Wahadat Maliha Laundry in action</h2>
         <p>Instagram video provided for the website.</p>
       </div>
       <div class="video-wrap">
         <div class="video-inner">
-          <iframe src="https://www.instagram.com/tv/Cme7XoxOwbk/embed" title="Wahadat Laundry Services Instagram Video" allowfullscreen scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+          <iframe src="https://www.instagram.com/tv/Cme7XoxOwbk/embed" title="Wahadat Maliha Laundry Services Instagram Video" allowfullscreen scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
         </div>
       </div>
       <div style="text-align:center;margin-top:18px">
@@ -388,11 +482,19 @@
         
         <div class="contact-link">
           <div class="icon"><i class="fa-solid fa-phone"></i></div>
-          <div><small>Phone</small><strong>+971 55 710 0191</strong></div>
+          <div><small>Mobile 1</small><strong>+971 54 333 4393</strong></div>
+        </div>
+        <div class="contact-link">
+          <div class="icon"><i class="fa-solid fa-phone"></i></div>
+          <div><small>Mobile 2</small><strong>+971 50 896 8126</strong></div>
+        </div>
+        <div class="contact-link">
+          <div class="icon"><i class="fa-solid fa-phone"></i></div>
+          <div><small>Landline</small><strong>+971 6 556 7970</strong></div>
         </div>
         <div class="contact-link">
           <div class="icon" style="background:#25D366;color:#fff"><i class="fa-brands fa-whatsapp"></i></div>
-          <div><small>WhatsApp</small><strong>+971 55 710 0191</strong></div>
+          <div><small>WhatsApp</small><strong>+971 54 333 4393</strong></div>
         </div>
         <div class="contact-link">
           <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
@@ -403,12 +505,12 @@
           <a href="https://facebook.com" target="_blank" class="social-box fb"><i class="fa-brands fa-facebook-f"></i></a>
           <a href="https://instagram.com" target="_blank" class="social-box ig"><i class="fa-brands fa-instagram"></i></a>
           <a href="https://youtube.com" target="_blank" class="social-box yt"><i class="fa-brands fa-youtube"></i></a>
-          <a href="https://wa.me/971557100191" target="_blank" class="social-box wa"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://wa.me/971543334393" target="_blank" class="social-box wa"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
 
         <div class="qr-grid">
           <div class="qr-card">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/971557100191" alt="WhatsApp QR">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/971543334393" alt="WhatsApp QR">
             <small>Chat on WhatsApp</small>
           </div>
           <div class="qr-card">
@@ -416,13 +518,14 @@
             <small>Get Location</small>
           </div>
           <div class="qr-card">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=tel:+971557100191" alt="Phone QR">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=tel:+971543334393" alt="Phone QR">
             <small>Call Us Now</small>
           </div>
         </div>
 
         <div class="buttons" style="margin-top:20px">
-          <a class="btn btn-primary" href="tel:+971557100191">Call Now</a>
+          <a class="btn btn-primary" href="tel:+971543334393">Call Now</a>
+          <a class="btn btn-primary" href="tel:+97165567970"><i class="fa-solid fa-phone"></i> Landline</a>
         </div>
       </div>
 
@@ -453,13 +556,13 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <h3>Wahadat Laundry Services</h3>
+        <h3>Wahadat Maliha Laundry Services</h3>
         <p>Professional laundry care in Sharjah, UAE. Clean clothes, fresh confidence, and fast service right to your doorstep.</p>
         <div class="footer-socials">
           <a href="https://facebook.com" target="_blank" class="f-social fb"><i class="fa-brands fa-facebook-f"></i></a>
           <a href="https://instagram.com" target="_blank" class="f-social ig"><i class="fa-brands fa-instagram"></i></a>
           <a href="https://youtube.com" target="_blank" class="f-social yt"><i class="fa-brands fa-youtube"></i></a>
-          <a href="https://wa.me/971557100191" target="_blank" class="f-social wa"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://wa.me/971543334393" target="_blank" class="f-social wa"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
       </div>
       
@@ -469,7 +572,7 @@
           <li><a href="#home">Home</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#about">About Us</a></li>
-          <li><a href="#video">Video</a></li>
+          <li><a href="#gallery">Gallery</a></li>
         </ul>
       </div>
 
@@ -486,7 +589,9 @@
       <div class="footer-col">
         <h4>Contact Info</h4>
         <ul>
-          <li><i class="fa-solid fa-phone" style="margin-right:8px"></i> +971543334393</li>
+          <li><i class="fa-solid fa-phone" style="margin-right:8px"></i> +971 54 333 4393</li>
+          <li><i class="fa-solid fa-phone" style="margin-right:8px"></i> +971 50 896 8126</li>
+          <li><i class="fa-solid fa-phone" style="margin-right:8px"></i> +971 6 556 7970</li>
           <li><i class="fa-solid fa-location-dot" style="margin-right:8px"></i> Sharjah, UAE</li>
           <li><i class="fa-solid fa-clock" style="margin-right:8px"></i> Mon - Sun: 24/7</li>
         </ul>
@@ -494,13 +599,18 @@
     </div>
 
     <div class="footer-bottom">
-      <div>© <span id="year"></span> Wahadat Laundry Services. All rights reserved.</div>
+      <div>© <span id="year"></span> Wahadat Maliha Laundry Services. All rights reserved.</div>
       <div>Designed with SoftSoluction CheapTech <i class="fa-solid fa-heart" style="color:#ff4d4d"></i> https://fixmyitproblem.online/</div>
     </div>
   </div>
 </footer>
 
 <a class="float-wa" href="https://wa.me/971543334393" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+<div class="modal" id="imageModal" onclick="closeModal(event)">
+  <button class="close" onclick="closeModal()">×</button>
+  <img id="modalImage" src="" alt="Gallery preview">
+</div>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -539,6 +649,18 @@
       links.style.background='#fff';
       links.style.borderRadius='16px';
       links.style.boxShadow='0 15px 40px rgba(13,49,87,.15)';
+    }
+  }
+
+  /* MODAL SCRIPT */
+  function openModal(src){
+    document.getElementById('modalImage').src=src;
+    document.getElementById('imageModal').classList.add('open');
+  }
+
+  function closeModal(e){
+    if(!e || e.target.id==='imageModal' || e.target.classList.contains('close')){
+      document.getElementById('imageModal').classList.remove('open');
     }
   }
 </script>
